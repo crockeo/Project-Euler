@@ -1,9 +1,8 @@
-
 -------------------------------
 -- Project Euler Challenge File
 -------------------------------
--- Number: 
--- Time started: 
+-- Number:
+-- Time started:
 -- Time ended:
 -------------------------------
 
