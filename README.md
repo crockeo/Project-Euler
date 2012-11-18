@@ -1,4 +1,9 @@
-Project-Euler
-=============
+#Project Euler
+---
 
-Challenges of Project Euler written in Haskell.
+##About
+A record of completed Project Euler challenges.
+
+##Credits
+Author: Crockeo
+Language: Haskell
