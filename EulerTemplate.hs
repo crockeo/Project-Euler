@@ -3,8 +3,8 @@
 -- Project Euler Challenge File
 -------------------------------
 -- Number: 
--- Date started: 
--- Date ended:
+-- Time started: 
+-- Time ended:
 -------------------------------
 
 -- Change the N to the current problem
