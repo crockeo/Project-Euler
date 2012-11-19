@@ -34,7 +34,7 @@ getPrimeFactorsLoop current number factors = do
 		else (getPrimeFactorsLoop (current + 2) number factors)
 
 
-getPrimeFactors number = (getPrimeFactorsLoop 1 number [0])
+getPrimeFactors number = getPrimeFactorsLoop 1 number [0]
 
 -- Call the main function to get the result
-main = undefined
+main = getPrimeFactors 600851475143
