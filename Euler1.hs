@@ -10,11 +10,9 @@
 -- Change the N to the current problem
 module Euler1 where
 
--- Finding the 
-e1 = sum
-	(filter
-		(\x -> x `mod` 3 == 0 || x `mod` 5 == 0)
-		(map (+0) [3..999]))
+-- Finding the
+e1 :: Integer
+e1 = sum [x | x <- [3..999], x `mod` 3 == 0 || x `mod` 5 == 0]
 
 -- Call the main function to get the result
 main = print (e1)
