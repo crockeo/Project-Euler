@@ -10,14 +10,17 @@
 -- Change the N to the current problem
 module Euler2 where
 
-e2loop a b c num = do
-	if c > 4000000
-		then num
-	else
-		if c `mod` 2 == 0
-			then (e2loop b c (b + c) (num + c))
-		else
-			(e2loop b c (b + c) num)
+generateFibonacciToLoop a b c array to = do
+	if c >= to
+		then array
+	else (generateFibonacciToLoop b c (b + c) (c : array) to)
+
+generateFibonacciTo to = generateFibonacciToLoop 1 1 2 [1, 1] to
+
+e2 = sum
+	(filter
+		(\x -> x `mod` 2 == 0)
+		(generateFibonacciTo 4000000))
 
 -- Call the main function to get the result
-main = print (e2loop 1 1 2 0)
+main = print (e2)
