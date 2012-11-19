@@ -9,6 +9,8 @@
 -- Change the N to the current problem
 module Euler3 where
 
+number = 600851475143
+
 -- Determining if a number is prime
 isPrimeLoop curr n = do
 	if (n == 1)
@@ -25,16 +27,8 @@ isPrimeLoop curr n = do
 
 isPrime n = (isPrimeLoop 2 n)
 
-getPrimeFactorsLoop current number factors = do
-	if ((current * current) > number)
-		then True
-	else
-		if ((number `mod` current == 0) && (isPrime number))
-			then (getPrimeFactorsLoop 1 (number / current) (current : factors))
-		else (getPrimeFactorsLoop (current + 2) number factors)
-
-
-getPrimeFactors number = getPrimeFactorsLoop 1 number [0]
+e3 :: [Integer]
+e3 = [x | x <- [1 .. (sqrt number)], number `mod` x == 0, isPrime x]
 
 -- Call the main function to get the result
-main = getPrimeFactors 600851475143
+main = print (e3)
