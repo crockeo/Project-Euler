@@ -3,7 +3,7 @@
 -------------------------------
 -- Number: 9
 -- Time started: 11/20/2012 - 2:08 PM
--- Time ended:
+-- Time ended: 11/21/2012 - 3:15 AM
 -------------------------------
 
 -- Change the N to the current problem
