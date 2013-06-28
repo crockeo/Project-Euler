@@ -2,7 +2,7 @@
 -- Project Euler Challenge File
 -------------------------------
 -- Number: 14
--- Time started: 6/28/2013 - ???
+-- Time started: 6/27/2013 - ???
 -- Time ended: 6/28/2013 - 12:24 PM
 -------------------------------
 
