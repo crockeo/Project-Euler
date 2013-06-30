@@ -9,6 +9,8 @@
 -- Change the N to the current problem
 module Euler17 where
 
+import Control.Applicative
+
 import Data.Maybe
 
 toWord :: Integer -> Maybe String
@@ -53,9 +55,8 @@ isOne n = n >= 1 && n < 10
   
 makeHundred :: Integer -> Maybe String
 makeHundred n
-  | res == Nothing = Nothing
-  | tensres == Nothing = Just ((fromJust res) ++ " hundred")
-  | otherwise = Just ((fromJust res) ++ " hundred and " ++ (fromJust tensres))
+  | tensres == Nothing = (++ " hundred") <$> res
+  | otherwise = (++) <$> ((++) <$> res <*> (Just " hundred and ")) <*> tensres
   where tens = n `mod` 100
         res = toWord ((n - tens) `div` 100)
         tensres = if isOne tens
@@ -64,10 +65,9 @@ makeHundred n
 
 makeTen :: Integer -> Maybe String
 makeTen n
-  | res == Nothing = Nothing
   | n >= 10 && n < 20 = toWord n
   | onesres == Nothing = res
-  | otherwise = Just ((fromJust res) ++ "-" ++ (fromJust onesres))
+  | otherwise = (++) <$> ((++) <$> res <*> (Just "-")) <*> onesres
   where ones = n `mod` 10
         res = toWord (n - ones)
         onesres = makeOne ones
