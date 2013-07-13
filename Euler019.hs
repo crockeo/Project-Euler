@@ -79,11 +79,10 @@ isTargetDay (1, Sunday, month, year) = True
 isTargetDay date = False
 
 calcLoop :: Date -> Int
-calcLoop date@(daynum, day, month, 2000) = 0
-calcLoop date =
-  if isTargetDay date
-    then 1 + (calcLoop (nextDate date))
-    else (calcLoop (nextDate date))
+calcLoop date@(daynum, day, month, 2001) = 0
+calcLoop date
+  | isTargetDay date = 1 + (calcLoop $ nextDate date)
+  | otherwise        = calcLoop $ nextDate date
 
 -- Call the main function to get the result
 main = calcLoop (1, Tuesday, January, 1901)
