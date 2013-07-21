@@ -9,12 +9,7 @@
 -- Change the N to the current problem
 module Euler34 where
 
-splitNum :: Int -> [Int]
-splitNum 0 = []
-splitNum n = (splitNum (n `div` 10)) ++ [n `mod` 10]
-
-factorials :: [Int]
-factorials = 1 : [n * factorials !! (n - 1) | n <- [1 .. 9]]
+import Utils
 
 digitFactorials :: Int -> Int
 digitFactorials n = sum $ map (\x -> factorials !! x) $ splitNum n
