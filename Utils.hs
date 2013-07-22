@@ -33,9 +33,21 @@ joinNum [] = 0
 joinNum (x:xs) = (10 ^ (length xs)) * x + joinNum xs
 
 -- A list of factorials
-factorials :: [Int]
-factorials = 1 : [n * factorials !! (n - 1) | n <- [1 ..]]
+factorials :: [Integer]
+factorials = 1 : [n * factorials !! ((fromInteger n :: Int) - 1) | n <- [1 ..]]
 
 -- A list of fibonacci terms
-fibonaccis :: [Int]
-fibonaccis = 0 : 1 : [fibonaccis !! (n - 1) + fibonaccis !! (n - 2) | n <- [2 ..]]
+fibonaccis :: [Integer]
+fibonaccis = 0 : 1 : [fibonaccis !! ((fromInteger n :: Int) - 1) + fibonaccis !! ((fromInteger n :: Int) - 2) | n <- [2 ..]]
+
+-- A list of primes
+primes :: [Int]
+primes = [n | n <- [2 ..], isPrime n]
+
+-- Search functions
+quickElem :: (Ord a, Eq a) => a -> [a] -> Bool
+quickElem n [] = False
+quickElem n (x:xs)
+  | n <  x    = False
+  | n == x    = True
+  | otherwise = quickElem n xs
