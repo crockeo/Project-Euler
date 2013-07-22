@@ -8,6 +8,13 @@
 
 module Utils where
 
+-- Converting an int to a float
+toFloat :: Int -> Float
+toFloat n = (fromInteger $ toInteger n) :: Float
+
+toInt :: Float -> Int
+toInt = floor
+
 -- Checking if a number is prime
 isPrimeRaw :: Int -> Int -> Bool
 isPrimeRaw n x
@@ -51,3 +58,17 @@ quickElem n (x:xs)
   | n <  x    = False
   | n == x    = True
   | otherwise = quickElem n xs
+
+-- Checking if all elements are present in another list
+allElem :: (Eq a) => [a] -> [a] -> Bool
+allElem check to = and $ map (\x -> elem x to) check
+
+-- Checking if a number is pandigital
+isPandigital :: Int -> Bool
+isPandigital n =
+  allElem [1 .. (length sn)] sn
+  where sn = splitNum n
+
+-- Getting the approximate sqrt of a number floor(sqrt(n))
+cleanSqrt :: Int -> Int
+cleanSqrt n = toInt $ sqrt $ toFloat n
