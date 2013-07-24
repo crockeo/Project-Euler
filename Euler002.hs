@@ -13,4 +13,4 @@ module Euler2 where
 import Utils
 
 -- Call the main function to get the result
-main = sum $ filter (\x -> x `mod` 2 == 0) $ takeWhile (\x -> x < 4000000) fibonaccis
+main = sum $ filter (even) $ takeWhile (\x -> x < 4000000) fibonaccis
