@@ -78,3 +78,14 @@ isPandigital n =
 -- Getting the approximate sqrt of a number floor(sqrt(n))
 cleanSqrt :: (Integral a) => a -> a
 cleanSqrt n = truncate $ (sqrt . fromIntegral) n
+
+-- Getting the divisors of a number
+divisorsRaw :: (Integral a) => a -> a -> [a]
+divisorsRaw n x
+  | x ^ 2 < n && n `mod` x == 0 = x : n `div` x : divisorsRaw n (x + 1)
+  | x ^ 2 < n                   = divisorsRaw n (x + 1)
+  | x ^ 2 == n                  = [x]
+  | otherwise                   = []
+
+divisors :: (Integral a) => a -> [a]
+divisors n = sort $ divisorsRaw n 1
