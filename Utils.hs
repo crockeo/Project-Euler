@@ -11,31 +11,31 @@ module Utils where
 import Data.List
 
 -- Checking if a number is prime
-isPrimeRaw :: (Integral a) => a -> a -> Bool
-isPrimeRaw n x
-  | x * x > n = True
-  | n `mod` x == 0 = False
-  | otherwise = isPrimeRaw n (x + 1)
-
 isPrime :: (Integral a) => a -> Bool
 isPrime 0 = False
 isPrime 1 = False
 isPrime n = isPrimeRaw n 2
+  where isPrimeRaw :: (Integral a) => a -> a -> Bool
+        isPrimeRaw n x
+          | x * x > n      = True
+          | n `mod` x == 0 = False
+          | otherwise      = isPrimeRaw n (x + 1)
 
--- Splitting and joining integers
-splitNumRaw :: (Integral a) => a -> [a]
-splitNumRaw 0 = []
-splitNumRaw n = (n `mod` 10) : splitNumRaw (n `div` 10)
-
+-- Splitting a number into an array if its digits
 splitNum :: (Integral a) => a -> [a]
 splitNum n
   | n < 0     = []
   | otherwise = reverse $ splitNumRaw n
+  where splitNumRaw :: (Integral a) => a -> [a]
+        splitNumRaw 0 = []
+        splitNumRaw n = (n `mod` 10) : splitNumRaw (n `div` 10)
 
+-- Joining an array of digits into a number
 joinNum :: (Integral a) => [a] -> a
 joinNum [] = 0
 joinNum (x:xs) = (10 ^ (length xs)) * x + joinNum xs
 
+-- Joining an array of numbers into a single number
 joinBigNums :: (Integral a) => [a] -> a
 joinBigNums list =
   joinNum $ concat slist
@@ -57,7 +57,7 @@ fibonaccis = scanl (+) 0 (1 : fibonaccis)
 primes :: (Integral a) => [a]
 primes = [n | n <- [2 ..], isPrime n]
 
--- Search functions
+-- Checking if an element is present in a sorted list
 quickElem :: (Ord a, Eq a) => a -> [a] -> Bool
 quickElem n [] = False
 quickElem n (x:xs)
@@ -80,12 +80,12 @@ cleanSqrt :: (Integral a) => a -> a
 cleanSqrt n = truncate $ (sqrt . fromIntegral) n
 
 -- Getting the divisors of a number
-divisorsRaw :: (Integral a) => a -> a -> [a]
-divisorsRaw n x
-  | x ^ 2 < n && n `mod` x == 0 = x : n `div` x : divisorsRaw n (x + 1)
-  | x ^ 2 < n                   = divisorsRaw n (x + 1)
-  | x ^ 2 == n                  = [x]
-  | otherwise                   = []
-
 divisors :: (Integral a) => a -> [a]
-divisors n = sort $ divisorsRaw n 1
+divisors n =
+  sort $ divisorsRaw n 1
+  where divisorsRaw :: (Integral a) => a -> a -> [a]
+        divisorsRaw n x
+          | x ^ 2 < n && n `mod` x == 0 = x : n `div` x : divisorsRaw n (x + 1)
+          | x ^ 2 < n                   = divisorsRaw n (x + 1)
+          | x ^ 2 == n                  = [x]
+          | otherwise                   = []
