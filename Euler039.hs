@@ -34,6 +34,9 @@ frequency l =
           where inc :: (a, Int) -> (a, Int)
                 inc (a, n) = (a, n + 1)
 
+sortedFrequency :: (Eq a, Ord a) => [a] -> [(a, Int)]
+sortedFrequency = sortBy (\a b -> compare (snd a) (snd b)) . frequency
+
 ----------------------------------
 -- Getting the sum of a triplet --
 ----------------------------------
@@ -44,7 +47,7 @@ tripSum (a, b, c) = a + b + c
 -- Generating all pythagorean triplets --
 -----------------------------------------
 generateTriplets :: [(Int, Int, Int)]
-generateTriplets = [(a, b, c) | c <- [5 .. 500], b <- [4 .. c], a <- [3 .. b], a^2 + b^2 == c^2]
+generateTriplets = [(a, b, cleanSqrt (a^2 + b^2)) | b <- [4 .. 500], a <- [3 .. b], a^2 + b^2 == cleanSqrt (a^2 + b^2)^2]
 
 -- Call the main function to get the result
 main = last $ sortBy (\a b -> compare (snd a) (snd b)) $ frequency $ map (tripSum) generateTriplets
