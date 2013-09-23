@@ -79,6 +79,10 @@ isPandigital n =
 cleanSqrt :: (Integral a) => a -> a
 cleanSqrt n = truncate $ (sqrt . fromIntegral) n
 
+-- Checking if number a is divisible by number b
+divisible :: (Integral a) => a -> a -> Bool
+divisible a b = a `mod` b == 0
+
 -- Getting the divisors of a number
 divisors :: (Integral a) => a -> [a]
 divisors n =
@@ -89,3 +93,7 @@ divisors n =
           | x ^ 2 < n                   = divisorsRaw n (x + 1)
           | x ^ 2 == n                  = [x]
           | otherwise                   = []
+
+-- Taking a range of a list
+takeRange :: [a] -> (Int, Int) -> [a]
+takeRange l (b, e) = take (e - b + 1) $ drop b l
