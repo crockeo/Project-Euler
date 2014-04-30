@@ -22,18 +22,27 @@ isPrime n = isPrimeRaw n 2
           | otherwise      = isPrimeRaw n (x + 1)
 
 -- Splitting a number into an array if its digits
+-- (both forwards and backwards)
+splitNumBackwards :: (Integral a) => a -> [a]
+splitNumBackwards n
+  | n <= 0    = []
+  | otherwise = (n `mod` 10) : (splitNumBackwards (n `div` 10))
+
 splitNum :: (Integral a) => a -> [a]
-splitNum n
-  | n < 0     = []
-  | otherwise = reverse $ splitNumRaw n
-  where splitNumRaw :: (Integral a) => a -> [a]
-        splitNumRaw 0 = []
-        splitNumRaw n = (n `mod` 10) : splitNumRaw (n `div` 10)
+splitNum = reverse . splitNumBackwards
 
 -- Joining an array of digits into a number
+-- (both forwards and backwards)
+joinNumBackwards :: (Integral a) => [a] -> a
+joinNumBackwards l =
+  joinNumBackwardsRaw l 1
+  where joinNumBackwardsRaw :: (Integral a) => [a] -> a -> a
+        joinNumBackwardsRaw [] _     = 0
+        joinNumBackwardsRaw (x:xs) n =
+          (x * n) + (joinNumBackwardsRaw xs (n * 10))
+
 joinNum :: (Integral a) => [a] -> a
-joinNum [] = 0
-joinNum (x:xs) = (10 ^ (length xs)) * x + joinNum xs
+joinNum = joinNumBackwards . reverse
 
 -- Joining an array of numbers into a single number
 joinBigNums :: (Integral a) => [a] -> a
